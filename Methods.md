@@ -1,4 +1,396 @@
-# Support encryption methods
+
+
+## Builders
+
+|Method|Builder|
+|-------|-------|
+|AES|BuilderAES|
+|ARCFOUR|BuilderARCFOUR|
+|Blowfish|BuilderBlowfish|
+|DES|BuilderDES|
+|DESede|BuilderDESede|
+|RSA|BuilderRSA|
+|HMAC|BuilderHMAC|
+|PBE|BuilderPBE|
+
+## Default values
+### AES
+```java 
+byte[] key = new byte[]{};
+AES.Key keySize = AES.Key.SIZE_128;
+byte[] iVector = new byte[]{};
+```
+### ARCFOUR
+```java 
+byte[] key = new byte[]{};
+int keySize = 1;
+```
+### Blowfish
+```java
+byte[] key = new byte[]{};
+int keySize = 1;
+byte[] iVector = new byte[]{};
+```
+### DES
+```java
+byte[] key = new byte[]{};
+int keySize = 1;
+```
+### DESede
+```java
+byte[] key = new byte[]{};
+DESede.Key keySize = DESede.Key.SIZE_128;
+byte[] iVector = new byte[]{};
+```
+### HMAC
+```java
+byte[] key = new byte[]{};
+```
+### PBE
+```java
+byte[] key = new byte[]{};
+PBE.KeySize keySize;
+byte[] vector = new byte[]{};
+```
+### RSA
+```java
+RSA.KeySize keySize = RSA.setKeySize(512);
+RSA.KeyCallback keyCallback;
+```
+
+## Examples
+### AES
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderAES()
+                    .method(AES.Method.AES_CBC_PKCS5PADDING)
+                    .message("test message")
+                    .key("test key") // not necessary
+                    .keySize(AES.Key.SIZE_128) // not necessary
+                    .iVector("test vector") // not necessary
+                    .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderAES()
+                .method(AES.Method.AES_CBC_PKCS5PADDING)
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(AES.Key.SIZE_128) // not necessary
+                .iVector("test vector") // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### ARCFOUR
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderARCFOUR()
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(1024) // not necessary
+                .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderARCFOUR()
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(1024) // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### Blowfish
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderBlowfish()
+                .message("test message")
+                .method(Blowfish.Method.BLOWFISH_CBC_ISO10126Padding)
+                .key(key) // not necessary
+                .keySize(1024) // not necessary
+                .iVector("test vector") // not necessary
+                .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderBlowfish()
+                .method(Blowfish.Method.BLOWFISH_CBC_ISO10126Padding)
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(1024) // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### DES
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderDES()
+                .message("test message")
+                .method(DES.Method.DES_CBC_ISO10126Padding)
+                .key("test key") // not necessary   
+                .iVector("test vector") // not necessary
+                .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderDES()
+                .method(DES.Method.DES_CBC_ISO10126Padding)
+                .message("test message")
+                .key("test key") // not necessary
+                .iVector("test vector") // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### DESede
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderDESede()
+                        .method(DESede.Method.DESEDE_CBC_ISO10126Padding)
+                        .message("test message")
+                        .key("test key") // not necessary
+                        .keySize(DESede.Key.SIZE_128) // not necessary
+                        .iVector("test vector") // not necessary
+                        .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderDESede()
+                .method(DESede.Method.DESEDE_CBC_ISO10126Padding)
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(DESede.Key.SIZE_128) // not necessary
+                .iVector("test vector") // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### HMAC
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderHMAC()
+                    .message("test message")
+                    .method(HMAC.Method.HMAC_SHA_1)
+                    .key("test key") // not necessary
+                    .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderHMAC()
+                .method(HMAC.Method.HMAC_SHA_1)
+                .message("test message")
+                .key("test key") // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### PBE
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderPBE()
+                    .message("test message")
+                    .method(PBE.Method.PBE_with_MD5_and_AES_128_CBC_OPENSSL)
+                    .key("test key") // not necessary
+                    .keySize(PBE.setKeySize(16)) // not necessary
+                    .iVector("test vector") // not necessary
+                    .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderPBE()
+                .message("test message")
+                .method(PBE.Method.PBE_with_MD5_and_AES_128_CBC_OPENSSL)
+                .key("test key") // not necessary
+                .keySize(PBE.setKeySize(16)) // not necessary
+                .iVector("test vector") // not necessary
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                }).encrypeAsync();
+```
+### RSA
+Synchronous:
+```java 
+String encrypt = Encoder.BuilderRSA()
+                        .message("test message")
+                        .method(RSA.Method.RSA_ECB_OAEP_with_SHA1_and_MGF1_PADDING)
+                        .key(keyPair) // or privateKey(); or publicKey()
+                        .keySize(RSA.setKeySize(2048))
+                        .encrypt();
+```
+Asynchronous:
+```java 
+Encoder.BuilderRSA()
+                .message("test message")
+                .method(RSA.Method.RSA_ECB_OAEP_with_SHA1_and_MGF1_PADDING)
+                .key(keyPair) // or privateKey(); or publicKey()
+                .keySize(RSA.setKeySize(2048))
+                .encryptCallBack(new EncodeCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                })
+                .encrypeAsync();
+```
+
+Also you can to generate a key for RSA:
+```java 
+KeyPair key = Encoder.BuilderRSA()
+                .keySize(RSA.setKeySize(4096))
+                .generateKey();
+```
+Asynchronous:
+```java 
+Encoder.BuilderRSA()
+                .keySize(RSA.setKeySize(4096))
+                .keyCallBack(new RSA.KeyCallback() {
+                    @Override
+                    public void onSuccess(KeyPair result) {
+                        // TODO something
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                    }
+                })
+                .generateKeyAsync();
+```
+## Key sizes
+### AES
+```java 
+AES.Key.SIZE_128
+AES.Key.SIZE_192
+AES.Key.SIZE_256
+```
+### ARCFOUR
+```java 
+1 <= key < ∞
+```
+### Blowfish
+```java 
+1 <= key < ∞
+```
+### DES
+```java 
+key size always equal 8
+```
+### DESede
+```java
+DES.Key.SIZE_128
+DES.Key.SIZE_192
+```
+### HMAC
+```java
+key size equal length of byte array
+```
+### PBE
+|Method|Size|
+|-------|-------|
+|PBEWithSHA1AndDESede/CBC/PKCS5Padding|16, 24|
+|PBEWITHMD5AND128BITAES-CBC-OPENSSL|16|
+|PBEWITHMD5AND192BITAES-CBC-OPENSSL|24|
+|PBEWITHMD5AND256BITAES-CBC-OPENSSL|32|
+|PBEWITHMD5ANDDES|8|
+|PBEWITHMD5ANDRC2|8|
+|PBEWITHSHA1AND128BITAES-CBC-BC|16|
+|PBEWITHSHA1AND128BITRC2-CBC|16|
+|PBEWITHSHA1AND128BITRC4|16|
+|PBEWITHSHA1AND192BITAES-CBC-BC|24|
+|PBEWITHSHA1AND2-KEYTRIPLEDES-CBC|16, 24|
+|PBEWITHSHA1AND256BITAES-CBC-BC|32|
+|PBEWITHSHA1AND3-KEYTRIPLEDES-CBC|16, 24|
+|PBEWITHSHA1AND40BITRC2-CBC|8|
+|PBEWITHSHA1AND40BITRC4|8|
+|PBEWITHSHA1ANDDES|8|
+|PBEWITHSHA1ANDDESEDE|16, 32|
+|PBEWITHSHA1ANDRC2|8|
+|PBEWITHSHA256AND128BITAES-CBC-BC|16|
+|PBEWITHSHA256AND192BITAES-CBC-BC|24|
+|PBEWITHSHA256AND256BITAES-CBC-BC|32|
+|PBEWITHSHAAND128BITAES-CBC-BC|16|
+|PBEWITHSHAAND128BITRC2-CBC|16|
+|PBEWITHSHAAND128BITRC4|16|
+|PBEWITHSHAAND192BITAES-CBC-BC|24|
+|PBEWITHSHAAND2-KEYTRIPLEDES-CBC|16, 24|
+|PBEWITHSHAAND256BITAES-CBC-BC|32|
+|PBEWITHSHAAND3-KEYTRIPLEDES-CBC|16, 24|
+|PBEWITHSHAAND40BITRC2-CBC|8|
+|PBEWITHSHAAND40BITRC4|8|
+|PBEWITHSHAANDTWOFISH-CBC|8|
+|PBEWithSHAAnd3KeyTripleDES|16, 24|
+
+If you will not set the keySize, encryption method will use the first value.
+
+### RSA
+```java
+512 <= key < 65536
+key must be muliple of 64
+```
+## All Supports encryption methods
 
 |AES|ARCFOUR|Blowfish|
 |-------|-------|-------|
