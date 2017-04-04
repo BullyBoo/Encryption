@@ -73,7 +73,7 @@ Encoder.BuilderAES()
                 }).encrypeAsync();
 ```
 
-More information about supports methods you can find [here](https://github.com/BullyBoo/Encryption/blob/master/Methods.md)
+More information about supports methods, about keySizes and examples of using you can find [here](https://github.com/BullyBoo/Encryption/blob/master/Documentation.md)
 
 ## License
 ```
