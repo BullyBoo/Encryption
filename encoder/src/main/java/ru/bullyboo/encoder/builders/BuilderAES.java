@@ -22,9 +22,7 @@ import ru.bullyboo.encoder.methods.AES;
 /**
  * AES Encrypt/Decrypt Builder
  */
-public class BuilderAES extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderAES extends BaseBuilder<BuilderAES>{
 
     private volatile String method;
 
@@ -32,14 +30,6 @@ public class BuilderAES extends BaseBuilder{
     private volatile AES.Key keySize = AES.Key.SIZE_128;
 
     private volatile byte[] iVector = new byte[]{};
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderAES message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

@@ -22,23 +22,13 @@ import ru.bullyboo.encoder.methods.DES;
 /**
  * DES Encrypt/Decrypt Builder
  */
-public class BuilderDES extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderDES extends BaseBuilder<BuilderDES>{
 
     private volatile String method;
 
     private volatile byte[] key = new byte[]{};
 
     private volatile byte[] iVector = new byte[]{};
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderDES message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

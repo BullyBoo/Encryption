@@ -141,7 +141,7 @@ public class Blowfish extends BaseMethod{
     /**
      * Implementation of Blowfish encryption
      */
-    public static String encrypt(String method, byte[] key, int keySize, byte[] vector, String message) throws Exception {
+    public static String encrypt(String method, byte[] key, int keySize, byte[] vector, byte[]  message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize);
@@ -159,7 +159,7 @@ public class Blowfish extends BaseMethod{
             cipher.init(Cipher.ENCRYPT_MODE, keySpec);
         }
 
-        byte[] cipherText = cipher.doFinal(message.getBytes());
+        byte[] cipherText = cipher.doFinal(message);
 
         return Base64.encodeToString(cipherText, Base64.DEFAULT);
     }
@@ -167,7 +167,7 @@ public class Blowfish extends BaseMethod{
     /**
      * Implementation of Blowfish decryption
      */
-    public static String decrypt(String method, byte[] key, int keySize, byte[] vector, String message) throws Exception {
+    public static String decrypt(String method, byte[] key, int keySize, byte[] vector, byte[]  message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize);

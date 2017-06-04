@@ -2,8 +2,6 @@ package ru.bullyboo.encryption.tests;
 
 import ru.bullyboo.encoder.Encoder;
 import ru.bullyboo.encoder.callbacks.EncodeCallback;
-import ru.bullyboo.encoder.methods.ARCFOUR;
-import ru.bullyboo.encoder.methods.Blowfish;
 
 /**
  * Created by BullyBoo on 01.04.2017.
@@ -34,8 +32,9 @@ public class TestARCFOUR {
     private static void encrypt_decrypt(int keySize) {
 
         String encrypt = Encoder.BuilderARCFOUR()
-                .message(message)
-                .key(key, keySize)
+                .message("test message")
+                .key("test key")
+                .keySize(1024)
                 .encrypt();
 
         String decrypt = Encoder.BuilderARCFOUR()
@@ -59,22 +58,20 @@ public class TestARCFOUR {
     public static void testARCFOUR_Async(){
 
         Encoder.BuilderARCFOUR()
-                .message(message)
-                .key(key)
+                .message("test message")
+                .key("test key")
+                .keySize(1024)
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("encrypeAsync ARCFOUR onSuccess");
-                        System.out.println("decryptAsync ARCFOUR result = " + result);
-                        testARCFOUR_Async_decrypt(result);
+                        // TODO something
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync ARCFOUR onFailure");
                         e.printStackTrace();
                     }
-                }).encrypeAsync();
+                }).encryptAsync();
     }
 
     private static void testARCFOUR_Async_decrypt(String message){

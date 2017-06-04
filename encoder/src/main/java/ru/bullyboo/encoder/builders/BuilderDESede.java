@@ -22,9 +22,7 @@ import ru.bullyboo.encoder.methods.DESede;
 /**
  * AES Encrypt/Decrypt Builder
  */
-public class BuilderDESede extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderDESede extends BaseBuilder<BuilderDESede>{
 
     private volatile DESede.Method method;
 
@@ -32,14 +30,6 @@ public class BuilderDESede extends BaseBuilder{
     private volatile DESede.Key keySize = DESede.Key.SIZE_128;
 
     private volatile byte[] iVector = new byte[]{};
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderDESede message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

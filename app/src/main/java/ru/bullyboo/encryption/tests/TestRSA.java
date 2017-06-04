@@ -26,20 +26,10 @@ public class TestRSA {
             try {
                 final PrivateKey[] privKey = new PrivateKey[1];
                 String encrypt = Encoder.BuilderRSA()
-                        .message(message)
-                        .method(method)
-                        .keySize(RSA.setKeySize(keySize))
-                        .keyCallBack(new RSA.KeyCallback() {
-                            @Override
-                            public void onSuccess(KeyPair key) {
-                                privKey[0] = key.getPrivate();
-                            }
-
-                            @Override
-                            public void onFailure(Throwable e) {
-                                System.out.println("encrypt key error");
-                            }
-                        })
+                        .message("test message")
+                        .method(RSA.Method.RSA_ECB_OAEP_with_SHA1_and_MGF1_PADDING)
+                        .key(keyPair) // or privateKey(); or publicKey()
+                        .keySize(RSA.setKeySize(2048))
                         .encrypt();
 
                 System.out.println("encrypt with " + method.getMethod() + " and key " + keySize + " = " + encrypt);
@@ -144,36 +134,21 @@ public class TestRSA {
 
         Encoder.BuilderRSA()
                 .message("test message")
-                .method(RSA.Method.RSA_ECB_OAEP_with_MD5_and_MGF1_PADDING)
-                .keySize(RSA.setKeySize(4096))
-                .keyCallBack(new RSA.KeyCallback() {
-                    @Override
-                    public void onSuccess(KeyPair key) {
-                        System.out.println("encrypt RSA key taken");
-                        keyPair = key;
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e) {
-                        System.out.println("encrypt RSA key error");
-                        e.printStackTrace();
-                    }
-                })
+                .method(RSA.Method.RSA_ECB_OAEP_with_SHA1_and_MGF1_PADDING)
+                .key(keyPair) // or privateKey(); or publicKey()
+                .keySize(RSA.setKeySize(2048))
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("encrypeAsync RSA with " + RSA.Method.RSA_ECB_OAEP_with_MD5_and_MGF1_PADDING +
-                                " = " + result);
-                        testRSA_Async_decrypt(keyPair, result);
+                        // TODO something
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync RSA error");
                         e.printStackTrace();
                     }
                 })
-                .encrypeAsync();
+                .encryptAsync();
     }
 
     private static void testRSA_Async_decrypt(KeyPair key, String message){
@@ -199,24 +174,8 @@ public class TestRSA {
 
     public static void testRSA_Async_generateKey(){
 
-        Encoder.BuilderRSA()
-                .message(message)
-                .method(RSA.Method.RSA_ECB_OAEP_with_MD5_and_MGF1_PADDING)
+        KeyPair key = Encoder.BuilderRSA()
                 .keySize(RSA.setKeySize(4096))
-                .keyCallBack(new RSA.KeyCallback() {
-                    @Override
-                    public void onSuccess(KeyPair result) {
-                        System.out.println("generateKeyAsync RSA onSuccess");
-                        System.out.println("generateKeyAsync RSA public key = " + result.getPublic());
-                        System.out.println("generateKeyAsync RSA private key = " + result.getPrivate());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e) {
-                        System.out.println("generateKeyAsync RSA onFailure");
-                        e.printStackTrace();
-                    }
-                })
-                .generateKeyAsync();
+                .generateKey();
     }
 }

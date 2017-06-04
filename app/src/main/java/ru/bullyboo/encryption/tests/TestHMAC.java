@@ -2,7 +2,6 @@ package ru.bullyboo.encryption.tests;
 
 import ru.bullyboo.encoder.Encoder;
 import ru.bullyboo.encoder.callbacks.EncodeCallback;
-import ru.bullyboo.encoder.Hash;
 import ru.bullyboo.encoder.methods.HMAC;
 
 /**
@@ -23,9 +22,9 @@ public class TestHMAC {
         for(HMAC.Method method : methods){
 
             String encrypt = Encoder.BuilderHMAC()
-                    .message(message1)
-                    .method(method)
-                    .key(key)
+                    .message("test message")
+                    .method(HMAC.Method.HMAC_SHA_1)
+                    .key("test key")
                     .encrypt();
 
             System.out.println("encrypt with " + method.getMethod() + " = " + encrypt);
@@ -36,29 +35,26 @@ public class TestHMAC {
 
         Encoder.BuilderHMAC()
                 .method(HMAC.Method.HMAC_SHA_1)
-                .message(message)
-                .key(key)
+                .message("test message")
+                .key("test key")
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("encrypeAsync HMAC onSuccess");
-                        System.out.println("decryptAsync HMAC result = " + result);
-                        testHMAC_Async_decrypt(result);
+                        // TODO something
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync HMAC onFailure");
                         e.printStackTrace();
                     }
-                }).encrypeAsync();
+                }).encryptAsync();
     }
 
     private static void testHMAC_Async_decrypt(String message){
 
         Encoder.BuilderHMAC()
                 .method(HMAC.Method.HMAC_SHA_1)
-                .message(message)
+                .message("")
                 .key(key)
                 .encryptCallBack(new EncodeCallback() {
                     @Override

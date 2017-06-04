@@ -163,7 +163,7 @@ public class AES extends BaseMethod{
     /**
      * Implementation of AES encryption
      */
-    public static String encrypt(String method, byte[] key, Key keyType, byte[] vector, String message) throws Exception {
+    public static String encrypt(String method, byte[] key, Key keyType, byte[] vector, byte[] message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keyType.type);
@@ -181,7 +181,7 @@ public class AES extends BaseMethod{
             cipher.init(Cipher.ENCRYPT_MODE, keySpec);
         }
 
-        byte[] cipherText = cipher.doFinal(message.getBytes());
+        byte[] cipherText = cipher.doFinal(message);
 
         return Base64.encodeToString(cipherText, Base64.DEFAULT);
     }
@@ -189,7 +189,7 @@ public class AES extends BaseMethod{
     /**
      * Implementation of AES decryption
      */
-    public static String decrypt(String method, byte[] key, Key keyType, byte[] vector, String message) throws Exception       {
+    public static String decrypt(String method, byte[] key, Key keyType, byte[] vector, byte[] message) throws Exception       {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keyType.type);

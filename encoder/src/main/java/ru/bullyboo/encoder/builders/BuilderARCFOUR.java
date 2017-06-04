@@ -22,20 +22,10 @@ import ru.bullyboo.encoder.methods.ARCFOUR;
 /**
  * ARCFOUR Encrypt/Decrypt Builder
  */
-public class BuilderARCFOUR extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderARCFOUR extends BaseBuilder<BuilderARCFOUR>{
 
     private volatile byte[] key = new byte[]{};
     private volatile int keySize = 1;
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderARCFOUR message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption key and its bite size

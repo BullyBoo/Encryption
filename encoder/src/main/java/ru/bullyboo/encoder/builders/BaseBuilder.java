@@ -16,6 +16,8 @@
 
 package ru.bullyboo.encoder.builders;
 
+import java.nio.ByteBuffer;
+
 import ru.bullyboo.encoder.callbacks.EncodeCallback;
 import ru.bullyboo.encoder.threads.BaseThread;
 import ru.bullyboo.encoder.threads.EncodingThread;
@@ -23,12 +25,113 @@ import ru.bullyboo.encoder.threads.EncodingThread;
 /**
  * This class implements basic function of synchronous and asynchronous encoding
  */
-public abstract class BaseBuilder {
+public abstract class BaseBuilder<B extends BaseBuilder>{
+
+    byte[] message;
 
     /**
      * Callback for getting the result of encryption
      */
     volatile EncodeCallback callback;
+
+    /**
+     * Set the message for encrypting or decrypting
+     */
+    public B message(byte[] message) {
+        this.message = message;
+
+        return (B) this;
+    }
+
+    public B message(short message) {
+        this.message = ByteBuffer.allocate(4).putShort(message).array();
+        return (B) this;
+    }
+
+    public B message(short ... message) {
+        int size = message.length;
+        ByteBuffer buffer = ByteBuffer.allocate(4 * size);
+
+        for(short i : message){
+            buffer.putShort(i);
+        }
+        this.message = buffer.array();
+        return (B) this;
+    }
+
+    public B message(int message) {
+        this.message = ByteBuffer.allocate(4).putInt(message).array();
+
+        return (B) this;
+    }
+
+    public B message(int... message) {
+        int size = message.length;
+        ByteBuffer buffer = ByteBuffer.allocate(4 * size);
+
+        for(int i : message){
+            buffer.putInt(i);
+        }
+        this.message = buffer.array();
+        return (B) this;
+    }
+
+    public B message(float message) {
+        this.message = ByteBuffer.allocate(4).putFloat(message).array();
+
+        return (B) this;
+    }
+
+    public B message(float... message) {
+        int size = message.length;
+        ByteBuffer buffer = ByteBuffer.allocate(4 * size);
+
+        for(float i : message){
+            buffer.putFloat(i);
+        }
+        this.message = buffer.array();
+        return (B) this;
+    }
+
+    public B message(long message) {
+        this.message = ByteBuffer.allocate(4).putLong(message).array();
+
+        return (B) this;
+    }
+
+    public B message(long... message) {
+        int size = message.length;
+        ByteBuffer buffer = ByteBuffer.allocate(4 * size);
+
+        for(long i : message){
+            buffer.putLong(i);
+        }
+        this.message = buffer.array();
+        return (B) this;
+    }
+
+    public B message(double message) {
+        this.message = ByteBuffer.allocate(4).putDouble(message).array();
+
+        return (B) this;
+    }
+
+    public B message(double... message) {
+        int size = message.length;
+        ByteBuffer buffer = ByteBuffer.allocate(4 * size);
+
+        for(double i : message){
+            buffer.putDouble(i);
+        }
+        this.message = buffer.array();
+        return (B) this;
+    }
+
+    public B message(String message) {
+        this.message = message.getBytes();
+
+        return (B) this;
+    }
 
     /**
      * Set the callback
@@ -41,7 +144,7 @@ public abstract class BaseBuilder {
     /**
      * Start of asynchronous encrypting
     */
-    public void encrypeAsync(){
+    public void encryptAsync(){
         if(hasEnoughData()){
             BaseThread.EncodeAction action = new BaseThread.EncodeAction() {
                 @Override

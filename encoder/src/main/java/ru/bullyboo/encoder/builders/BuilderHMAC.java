@@ -22,21 +22,11 @@ import ru.bullyboo.encoder.methods.HMAC;
 /**
  * HMAC Encrypt/Decrypt Builder
  */
-public class BuilderHMAC extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderHMAC extends BaseBuilder<BuilderHMAC>{
 
     private volatile HMAC.Method method;
 
     private volatile byte[] key;
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderHMAC message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

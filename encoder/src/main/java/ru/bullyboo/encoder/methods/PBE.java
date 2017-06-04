@@ -108,7 +108,7 @@ public class PBE extends BaseMethod{
     /**
      * Implementation of PBE encryption
      */
-    public static String encrypt(Method method, byte[] key, KeySize keySize, byte[] vector, String message) throws Exception{
+    public static String encrypt(Method method, byte[] key, KeySize keySize, byte[] vector, byte[]  message) throws Exception{
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize.getSize());
@@ -126,7 +126,7 @@ public class PBE extends BaseMethod{
             cipher.init(Cipher.ENCRYPT_MODE, keySpec);
         }
 
-        byte[] cipherText = cipher.doFinal(message.getBytes());
+        byte[] cipherText = cipher.doFinal(message);
 
         return Base64.encodeToString(cipherText, Base64.DEFAULT);
     }
@@ -134,7 +134,7 @@ public class PBE extends BaseMethod{
     /**
      * Implementation of PBE decryption
      */
-    public static String decrypt(Method method, byte[] key, KeySize keySize, byte[] vector, String message) throws Exception {
+    public static String decrypt(Method method, byte[] key, KeySize keySize, byte[] vector, byte[]  message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize.getSize());

@@ -3,7 +3,6 @@ package ru.bullyboo.encryption.tests;
 import ru.bullyboo.encoder.Encoder;
 import ru.bullyboo.encoder.callbacks.EncodeCallback;
 import ru.bullyboo.encoder.constants.Padding;
-import ru.bullyboo.encoder.methods.Blowfish;
 import ru.bullyboo.encoder.methods.DES;
 
 /**
@@ -36,10 +35,10 @@ public class TestDES {
     private static void encrypt_decrypt(DES.Method method, int keySize) {
 
         String encrypt = Encoder.BuilderDES()
-                .message(message)
-                .method(method)
-                .key(key)
-                .iVector(vector)
+                .message("test message")
+                .method(DES.Method.DES_CBC_ISO10126Padding)
+                .key("test key") // not necessary
+                .iVector("test vector") // not necessary
                 .encrypt();
 
         String decrypt = Encoder.BuilderDES()
@@ -138,42 +137,41 @@ public class TestDES {
 
         Encoder.BuilderDES()
                 .method(DES.Method.DES_CBC_ISO10126Padding)
-                .message(message)
+                .message("test message")
                 .key(key)
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("encrypeAsync DES onSuccess");
+                        System.out.println("encryptAsync DES onSuccess");
                         System.out.println("decryptAsync DES result = " + result);
                         testDES_Async_decrypt(result);
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync DES onFailure");
+                        System.out.println("encryptAsync DES onFailure");
                         e.printStackTrace();
                     }
-                }).encrypeAsync();
+                }).encryptAsync();
     }
 
     private static void testDES_Async_decrypt(String message){
 
         Encoder.BuilderDES()
                 .method(DES.Method.DES_CBC_ISO10126Padding)
-                .message(message)
-                .key(key)
+                .message("test message")
+                .key("test key") // not necessary
+                .iVector("test vector") // not necessary
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("decryptAsync DES onSuccess");
-                        System.out.println("decryptAsync DES result = " + result);
+                        // TODO something
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("decryptAsync DES onFailure");
                         e.printStackTrace();
                     }
-                }).decryptAsync();
+                }).encryptAsync();
     }
 }

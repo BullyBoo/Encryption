@@ -22,9 +22,7 @@ import ru.bullyboo.encoder.methods.Blowfish;
 /**
  * Blowfish Encrypt/Decrypt Builder
  */
-public class BuilderBlowfish extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderBlowfish extends BaseBuilder<BuilderBlowfish>{
 
     private volatile String method;
 
@@ -32,14 +30,6 @@ public class BuilderBlowfish extends BaseBuilder{
     private volatile int keySize = 1;
 
     private volatile byte[] iVector = new byte[]{};
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderBlowfish message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

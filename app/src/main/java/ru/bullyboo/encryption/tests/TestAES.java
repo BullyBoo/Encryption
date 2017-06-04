@@ -29,10 +29,11 @@ public class TestAES {
 
         for(AES.Method method : methods){
             String encrypt = Encoder.BuilderAES()
-                    .message(message)
-                    .method(method)
-                    .key(key, keySize)
-                    .iVector(vector)
+                    .method(AES.Method.AES_CBC_PKCS5PADDING)
+                    .message("test message")
+                    .key("test key") // not necessary
+                    .keySize(AES.Key.SIZE_128) // not necessary
+                    .iVector("test vector") // not necessary
                     .encrypt();
 
 //            System.out.println("encrypt with " + method.getMethod() + " and key " + keySize + " = " + encrypt);
@@ -171,22 +172,21 @@ public class TestAES {
 
         Encoder.BuilderAES()
                 .method(AES.Method.AES_CBC_PKCS5PADDING)
-                .message(message)
-                .key(key)
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(AES.Key.SIZE_128) // not necessary
+                .iVector("test vector") // not necessary
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-//                        System.out.println("encrypeAsync AES onSuccess");
-//                        System.out.println("decryptAsync AES result = " + result);
-                        testAES_Async_decrypt(result);
+                        // TODO somethink
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync AES onFailure");
                         e.printStackTrace();
                     }
-                }).encrypeAsync();
+                }).encryptAsync();
 
     }
 

@@ -52,13 +52,13 @@ public class HMAC {
     /**
      * Implementation of HMAC encryption
      */
-    public static String encrypt(HMAC.Method method, byte[] key, String message) throws Exception{
+    public static String encrypt(HMAC.Method method, byte[] key, byte[]  message) throws Exception{
 
         SecretKeySpec keySpec = new SecretKeySpec(key, method.getMethod());
 
         Mac cipher = Mac.getInstance(method.getMethod());
         cipher.init(keySpec);
-        byte[] cipherText = cipher.doFinal(message.getBytes());
+        byte[] cipherText = cipher.doFinal(message);
 
         StringBuffer hash = new StringBuffer();
         for (int i = 0; i < cipherText.length; i++) {

@@ -29,9 +29,7 @@ import ru.bullyboo.encoder.threads.KeyGenerateThread;
 /**
  * RSA Encrypt/Decrypt Builder
  */
-public class BuilderRSA extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderRSA extends BaseBuilder<BuilderRSA>{
 
     private volatile RSA.Method method;
 
@@ -41,14 +39,6 @@ public class BuilderRSA extends BaseBuilder{
     private volatile RSA.KeySize keySize = RSA.setKeySize(512);
 
     private volatile RSA.KeyCallback keyCallback;
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderRSA message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting

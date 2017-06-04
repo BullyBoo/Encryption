@@ -107,7 +107,7 @@ public class RSA{
     /**
      * This method generates KeyPair and then sends it to encrypt method
      */
-    public static String encrypt(Method method, KeySize keySize, String message,
+    public static String encrypt(Method method, KeySize keySize, byte[]  message,
                                  KeyCallback keyCallBack) throws Exception {
 
         return encrypt(method, generateKey(keySize), message, keyCallBack);
@@ -117,7 +117,7 @@ public class RSA{
      * This method creates KeyPair object from public and private keys and then, sends it to encrypt method
      */
     public static String encrypt(Method method, PublicKey publicKey, PrivateKey privateKey,
-                                 String message, KeyCallback keyCallBack) throws Exception {
+                                 byte[]  message, KeyCallback keyCallBack) throws Exception {
 
         KeyPair key = new KeyPair(publicKey, privateKey);
 
@@ -128,13 +128,13 @@ public class RSA{
      * Implementation of RSA encryption
      */
     public static String encrypt(Method method, KeyPair key,
-                                 String message, KeyCallback keyCallBack) throws Exception {
+                                 byte[]  message, KeyCallback keyCallBack) throws Exception {
 
         sentKeys(keyCallBack, key);
 
         Cipher cipher = Cipher.getInstance(method.getMethod());
         cipher.init(Cipher.ENCRYPT_MODE, key.getPublic());
-        byte[] cipherText = cipher.doFinal(message.getBytes());
+        byte[] cipherText = cipher.doFinal(message);
 
         return Base64.encodeToString(cipherText, Base64.DEFAULT);
     }
@@ -142,14 +142,14 @@ public class RSA{
     /**
      * This method gets the private key from KeyPair and sends it to decrypt method
      */
-    public static String decrypt(Method method, KeyPair key, String message) throws Exception {
+    public static String decrypt(Method method, KeyPair key, byte[]  message) throws Exception {
         return decrypt(method, key.getPrivate(), message);
     }
 
     /**
      * Implementation of RSA decryption
      */
-    public static String decrypt(Method method, PrivateKey privateKey, String message) throws Exception{
+    public static String decrypt(Method method, PrivateKey privateKey, byte[]  message) throws Exception{
 
         Cipher cipher = Cipher.getInstance(method.getMethod());
         cipher.init(Cipher.DECRYPT_MODE, privateKey);

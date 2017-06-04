@@ -37,10 +37,11 @@ public class TestBlowfish {
     private static void encrypt_decrypt(Blowfish.Method method, int keySize) {
 
         String encrypt = Encoder.BuilderBlowfish()
-                .message(message)
-                .method(method)
-                .key(key, keySize)
-                .iVector(vector)
+                .message("test message")
+                .method(Blowfish.Method.BLOWFISH_CBC_ISO10126Padding)
+                .key(key) // not necessary
+                .keySize(1024) // not necessary
+                .iVector("test vector") // not necessary
                 .encrypt();
 
         String decrypt = Encoder.BuilderBlowfish()
@@ -140,22 +141,20 @@ public class TestBlowfish {
 
         Encoder.BuilderBlowfish()
                 .method(Blowfish.Method.BLOWFISH_CBC_ISO10126Padding)
-                .message(message)
-                .key(key)
+                .message("test message")
+                .key("test key") // not necessary
+                .keySize(1024) // not necessary
                 .encryptCallBack(new EncodeCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        System.out.println("encrypeAsync Blowfish onSuccess");
-                        System.out.println("decryptAsync Blowfish result = " + result);
-                        testBlowfish_Async_decrypt(result);
+                        // TODO something
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        System.out.println("encrypeAsync Blowfish onFailure");
                         e.printStackTrace();
                     }
-                }).encrypeAsync();
+                }).encryptAsync();
     }
 
     private static void testBlowfish_Async_decrypt(String message){

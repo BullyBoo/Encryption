@@ -22,9 +22,7 @@ import ru.bullyboo.encoder.methods.PBE;
 /**
  * PBE Encrypt/Decrypt Builder
  */
-public class BuilderPBE extends BaseBuilder{
-
-    private volatile String message;
+public class BuilderPBE extends BaseBuilder<BuilderPBE>{
 
     private volatile PBE.Method method;
 
@@ -32,14 +30,6 @@ public class BuilderPBE extends BaseBuilder{
     private volatile PBE.KeySize keySize;
 
     private volatile byte[] vector = new byte[]{};
-
-    /**
-     * Set the message for encrypting or decrypting
-     */
-    public BuilderPBE message(String message) {
-        this.message = message;
-        return this;
-    }
 
     /**
      * Set the encryption method for encrypting or decrypting
