@@ -11,6 +11,7 @@ public class TestHash {
     private static final String message = "test message"; //with padding
 
     public static void testHash(){
+        System.out.println("md2 = " + Encoder.Hashes().md2(message));
         System.out.println("md5 = " + Encoder.Hashes().md5(message));
         System.out.println("sha1 = " + Encoder.Hashes().sha1(message));
         System.out.println("sha224 = " + Encoder.Hashes().sha224(message));

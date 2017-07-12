@@ -67,8 +67,8 @@ public class Encoder {
         return new BuilderBlowfish();
     }
 
-    public static Hash Hashes() {
-        return new Hash();
+    public static ru.bullyboo.encoder.hashes.Hash Hashes() {
+        return new ru.bullyboo.encoder.hashes.Hash();
     }
 
 }

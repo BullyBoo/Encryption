@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package ru.bullyboo.encoder;
+package ru.bullyboo.encoder.hashes;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
@@ -27,19 +26,39 @@ import java.util.Formatter;
 public class Hash {
 
     /**
+     * Converting String to md2 hash
+     */
+    public String md2(String message){
+        byte[] hash = new MD2().getHash(message);
+
+        StringBuilder hexString = new StringBuilder();
+
+        for(int i = 0; i < 16; i++){
+            String h = Integer.toHexString(0xFF & hash[i]);
+
+            while (h.length() < 2){
+                h = "0" + h;
+            }
+            hexString.append(h);
+        }
+
+        return hexString.toString();
+    }
+
+    /**
      * Converting String to md5 hash
      */
-    public String md5(String key){
+    public String md5(String message){
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
 
-            digest.update(key.getBytes("UTF-8"));
+            digest.update(message.getBytes());
 
-            byte[] messegeDigist = digest.digest();
+            byte[] messageDigits = digest.digest();
 
             StringBuilder hexString = new StringBuilder();
 
-            for (byte b : messegeDigist){
+            for (byte b : messageDigits){
                 String h = Integer.toHexString(0xFF & b);
 
                 while (h.length() < 2){
@@ -51,8 +70,6 @@ public class Hash {
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -60,11 +77,11 @@ public class Hash {
     /**
      * Converting String to md5 hash
      */
-    public String sha1(String key){
+    public String sha1(String message){
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
 
-            byte[] hash = md.digest(key.getBytes("UTF-8"));
+            byte[] hash = digest.digest(message.getBytes());
 
             Formatter formatter = new Formatter();
 
@@ -74,8 +91,6 @@ public class Hash {
 
             return formatter.toString();
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -86,11 +101,11 @@ public class Hash {
     /**
      * Converting String to sha224 hash
      */
-    public String sha224(String key){
+    public String sha224(String message){
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-224");
+            MessageDigest digest = MessageDigest.getInstance("SHA-224");
 
-            byte[] hash = md.digest(key.getBytes("UTF-8"));
+            byte[] hash = digest.digest(message.getBytes());
 
             Formatter formatter = new Formatter();
 
@@ -100,8 +115,6 @@ public class Hash {
 
             return formatter.toString();
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -112,11 +125,11 @@ public class Hash {
     /**
      * Converting String to sha256 hash
      */
-    public String sha256(String key){
+    public String sha256(String message){
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-            byte[] hash = md.digest(key.getBytes("UTF-8"));
+            byte[] hash = digest.digest(message.getBytes());
 
             Formatter formatter = new Formatter();
 
@@ -126,8 +139,6 @@ public class Hash {
 
             return formatter.toString();
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -138,11 +149,11 @@ public class Hash {
     /**
      * Converting String to sha384 hash
      */
-    public String sha384(String key){
+    public String sha384(String message){
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-384");
+            MessageDigest digest = MessageDigest.getInstance("SHA-384");
 
-            byte[] hash = md.digest(key.getBytes("UTF-8"));
+            byte[] hash = digest.digest(message.getBytes());
 
             Formatter formatter = new Formatter();
 
@@ -152,8 +163,6 @@ public class Hash {
 
             return formatter.toString();
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -164,11 +173,11 @@ public class Hash {
     /**
      * Converting String to sha512 hash
      */
-    public String sha512(String key){
+    public String sha512(String message){
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
 
-            byte[] hash = md.digest(key.getBytes("UTF-8"));
+            byte[] hash = digest.digest(message.getBytes());
 
             Formatter formatter = new Formatter();
 
@@ -178,8 +187,6 @@ public class Hash {
 
             return formatter.toString();
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
