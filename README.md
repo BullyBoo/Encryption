@@ -5,22 +5,22 @@ Implementation of encription methods
 
 Gradle:
 ```groovy
-compile 'ru.bullyboo.ecryption:encoder:1.0.1'
+compile 'ru.bullyboo.ecryption:encoder:1.0.2'
 ```
 Maven:
 ```xml
 <dependency> 
   <groupId>ru.bullyboo.ecryption</groupId> 
   <artifactId>encoder</artifactId> 
-  <version>1.0.1</version> 
+  <version>1.0.2</version> 
   <type>pom</type> 
 </dependency>
 ```
 JAR:
 
-[Download](https://github.com/BullyBoo/Encryption/releases/download/1.0.1/encoder-1.0.1.jar)
+[Download](https://github.com/BullyBoo/Encryption/releases/download/1.0.2/encoder-1.0.2.jar)
 
-[Source](https://github.com/BullyBoo/Encryption/releases/download/1.0.1/encoder-1.0.1-sources.jar)
+[Source](https://github.com/BullyBoo/Encryption/releases/download/1.0.2/encoder-1.0.2-sources.jar)
 
 ## Donations
 
