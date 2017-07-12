@@ -22,6 +22,19 @@ JAR:
 
 [Source](https://github.com/BullyBoo/Encryption/releases/download/1.0.1/encoder-1.0.1-sources.jar)
 
+## Donations
+
+Please support the project! 
+
+For coffee/beer and further development of the project:
+
+* [Donate 5$](https://www.paypal.me/bullyboo/5usd)
+* [Donate 10$](https://www.paypal.me/bullyboo/10usd)
+* [Donate 25$](https://www.paypal.me/bullyboo/25usd)
+* [Donate 50$](https://www.paypal.me/bullyboo/50usd)
+* [Donate 100$](https://www.paypal.me/bullyboo/100usd)
+* [Other](https://www.paypal.me/bullyboo)
+
 ## Usage
 
 The main class of this library is Encoder.
