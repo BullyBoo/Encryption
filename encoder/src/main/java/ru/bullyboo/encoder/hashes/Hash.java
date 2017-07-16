@@ -46,6 +46,13 @@ public class Hash {
     }
 
     /**
+     * Converting String to md4 hash
+     */
+    public String md4(String message){
+        return new MD4().getHash(message);
+    }
+
+    /**
      * Converting String to md5 hash
      */
     public String md5(String message){

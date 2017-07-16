@@ -16,6 +16,8 @@
 
 package ru.bullyboo.encoder.utils;
 
+import java.util.List;
+
 /**
  * Class helper for working with arrays
  */
@@ -51,4 +53,13 @@ public class ArrayUtils {
         return array;
     }
 
+    public static int[] convertListToArray(List<Integer> integerList){
+        int[] array = new int[integerList.size()];
+
+        for(int i = 0; i < integerList.size(); i++){
+            array[i] = integerList.get(i);
+        }
+
+        return array;
+    }
 }

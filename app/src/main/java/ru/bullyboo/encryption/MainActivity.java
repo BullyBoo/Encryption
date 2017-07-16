@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //        TestDESede.testAll_DESede();
 //        TestDESede.testDESede_Async();
 
-//        TestBlowfish.testAll_Blowfish();  success
+//        TestBlowfish.testAll_Blowfish();
 //        TestBlowfish.testAll_CFB_Blowfish();
 //        TestBlowfish.testAll_OFB_Blowfish();
 //        TestBlowfish.testBlowfish_Async();
