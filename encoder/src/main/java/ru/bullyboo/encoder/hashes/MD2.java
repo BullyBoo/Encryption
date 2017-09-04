@@ -22,7 +22,7 @@ import ru.bullyboo.encoder.utils.ArrayUtils;
  * The MD2 Message-Digest Algorithm
  */
 
-public class MD2 {
+class MD2 {
 
     /**
      * substitution table derived from Pi. Copied from the RFC.
@@ -46,11 +46,6 @@ public class MD2 {
             49,  68,  80, 180, 143, 237,  31,  26, 219, 153, 141,  51, 159,  17, 131,  20};
 
     /**
-     * Message in bytes
-     */
-    private int[] messageInt;
-
-    /**
      * MD Buffer
      */
     private int[] x;
@@ -60,7 +55,7 @@ public class MD2 {
      */
     public byte[] getHash(String message){
 
-        messageInt = appendPaddingBytes(message.getBytes());
+        int[] messageInt = appendPaddingBytes(message.getBytes());
         messageInt = appendCheckSum(messageInt);
 
         initMdBuffer();
@@ -179,7 +174,7 @@ public class MD2 {
      * https://tools.ietf.org/html/rfc1319
      *
      */
-    public int[] processMessage(int[] array){
+    private int[] processMessage(int[] array){
 
         int size = array.length;
 

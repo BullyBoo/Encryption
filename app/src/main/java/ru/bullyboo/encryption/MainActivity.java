@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 
+import ru.bullyboo.encoder.Encoder;
 import ru.bullyboo.encryption.tests.TestAES;
 import ru.bullyboo.encryption.tests.TestARCFOUR;
 import ru.bullyboo.encryption.tests.TestBlowfish;
@@ -56,5 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        TestBlowfish.testBlowfish_Async();
 
 //        TestHash.testHash();
+
+        Encoder.callC();
     }
 }

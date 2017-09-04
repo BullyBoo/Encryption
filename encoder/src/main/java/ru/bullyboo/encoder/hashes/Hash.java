@@ -56,101 +56,28 @@ public class Hash {
      * Converting String to md5 hash
      */
     public String md5(String message){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-
-            digest.update(message.getBytes());
-
-            byte[] messageDigits = digest.digest();
-
-            StringBuilder hexString = new StringBuilder();
-
-            for (byte b : messageDigits){
-                String h = Integer.toHexString(0xFF & b);
-
-                while (h.length() < 2){
-                    h = "0" + h;
-                }
-                hexString.append(h);
-            }
-
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new MD5().getHash(message);
     }
 
     /**
      * Converting String to md5 hash
      */
     public String sha1(String message){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-
-            byte[] hash = digest.digest(message.getBytes());
-
-            Formatter formatter = new Formatter();
-
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-
-            return formatter.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return new SHA1().getHash(message);
     }
 
     /**
      * Converting String to sha224 hash
      */
     public String sha224(String message){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-224");
-
-            byte[] hash = digest.digest(message.getBytes());
-
-            Formatter formatter = new Formatter();
-
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-
-            return formatter.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return new SHA224().getHash(message);
     }
 
     /**
      * Converting String to sha256 hash
      */
     public String sha256(String message){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-
-            byte[] hash = digest.digest(message.getBytes());
-
-            Formatter formatter = new Formatter();
-
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-
-            return formatter.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return new SHA256().getHash(message);
     }
 
     /**
@@ -200,4 +127,47 @@ public class Hash {
 
         return null;
     }
+
+    /**
+     * Converting String to adler32 hash
+     */
+    public String adler32(String message){
+        return new Adler32().getHash(message);
+    }
+
+    /**
+     * Converting String to fnv132 hash
+     */
+    public String fnv132(String message){
+        return new FNV132().getHash(message);
+    }
+
+    /**
+     * Converting String to ripemd128 hash
+     */
+    public String ripemd128(String message){
+        return new RIPEMD_128().getHash(message);
+    }
+
+    /**
+     * Converting String to ripemd160 hash
+     */
+    public String ripemd160(String message){
+        return new RIPEMD_160().getHash(message);
+    }
+
+    /**
+     * Converting String to ripemd256 hash
+     */
+    public String ripemd256(String message){
+        return new RIPEMD_256().getHash(message);
+    }
+
+    /**
+     * Converting String to ripemd320 hash
+     */
+    public String ripemd320(String message){
+        return new RIPEMD_320().getHash(message);
+    }
+
 }

@@ -25,7 +25,7 @@ import ru.bullyboo.encoder.utils.ArrayUtils;
  * The MD4 Message-Digest Algorithm
  */
 
-public class MD4 {
+class MD4 {
 
     /**
      * MD Buffer
@@ -77,8 +77,8 @@ public class MD4 {
     private List<Integer> appendPaddingBits(byte[] bytes){
         List<Integer> intList = new ArrayList<>();
 
-        for(int i = 0; i < bytes.length; i++){
-            intList.add((int) bytes[i]);
+        for (byte aByte : bytes) {
+            intList.add((int) aByte);
         }
 
         int one = 128;
@@ -378,7 +378,7 @@ public class MD4 {
         return hexString.toString();
     }
 
-    public int changeEndianness(int x){
+    private int changeEndianness(int x){
         return ((x & 0xFF) << 24) | ((x & 0xFF00) << 8) | ((x & 0xFF0000) >>> 8) | ((x & 0xFF000000) >>> 24);
     }
 
