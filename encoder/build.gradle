@@ -7,4 +7,4 @@ dependencies {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-apply from: 'C:\\Users\\BullyBoo\\AndroidStudioProjects\\Encryption\\constants.gradle'
+//apply from: 'C:\\Users\\BullyBoo\\AndroidStudioProjects\\Encryption\\constants.gradle'

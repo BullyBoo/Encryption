@@ -142,7 +142,7 @@ public class DES extends BaseMethod{
     /**
      * Implementation of DES encryption
      */
-    public static String encrypt(String method, byte[] key, byte[] vector, byte[]  message) throws Exception {
+    public static String encrypt(String method, byte[] key, byte[] vector, byte[] message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, KEY_LEGHT);
@@ -168,7 +168,7 @@ public class DES extends BaseMethod{
     /**
      * Implementation of DES decryption
      */
-    public static String decrypt(String method, byte[] key, byte[] vector, byte[]  message) throws Exception{
+    public static String decrypt(String method, byte[] key, byte[] vector, byte[] message) throws Exception{
 
 //        generate Key
         byte[] keyBytes = generateKey(key, KEY_LEGHT);

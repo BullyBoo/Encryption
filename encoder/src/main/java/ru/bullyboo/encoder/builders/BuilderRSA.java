@@ -25,6 +25,7 @@ import ru.bullyboo.encoder.threads.BaseThread;
 import ru.bullyboo.encoder.constants.Constants;
 import ru.bullyboo.encoder.methods.RSA;
 import ru.bullyboo.encoder.threads.KeyGenerateThread;
+import ru.bullyboo.encoder.utils.EncryptUtils;
 
 /**
  * RSA Encrypt/Decrypt Builder
@@ -64,8 +65,18 @@ public class BuilderRSA extends BaseBuilder<BuilderRSA>{
     /**
      * Set private and public key for encrypting or decrypting
      */
+    public BuilderRSA publicKey(String publicKey) {
+        this.publicKey = EncryptUtils.getRsaPublicKey(publicKey);
+        return this;
+    }
+
     public BuilderRSA publicKey(PublicKey publicKey) {
         this.publicKey = publicKey;
+        return this;
+    }
+
+    public BuilderRSA privateKey(String privateKey) {
+        this.privateKey = EncryptUtils.getRsaPrivateKey(privateKey);
         return this;
     }
 
@@ -117,8 +128,8 @@ public class BuilderRSA extends BaseBuilder<BuilderRSA>{
 
         new KeyGenerateThread(action, new BaseThread.ThreadCallback<KeyPair>() {
             @Override
-            public void onFinish(KeyPair parametr) {
-                keyCallback.onSuccess(parametr);
+            public void onFinish(KeyPair parameter) {
+                keyCallback.onSuccess(parameter);
             }
 
             @Override
@@ -132,8 +143,8 @@ public class BuilderRSA extends BaseBuilder<BuilderRSA>{
     String encryption() throws Exception {
         if(key != null){
             return RSA.encrypt(method, key, message, keyCallback);
-        } else if(publicKey != null && privateKey != null){
-            return RSA.encrypt(method, publicKey, privateKey, message, keyCallback);
+        } else if(publicKey != null){
+            return RSA.encrypt(method, publicKey, message, keyCallback);
         } else {
             return RSA.encrypt(method, keySize, message, keyCallback);
         }

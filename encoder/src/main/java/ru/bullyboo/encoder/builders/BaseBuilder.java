@@ -16,6 +16,11 @@
 
 package ru.bullyboo.encoder.builders;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import ru.bullyboo.encoder.callbacks.EncodeCallback;
@@ -32,12 +37,19 @@ public abstract class BaseBuilder<B extends BaseBuilder>{
     /**
      * Callback for getting the result of encryption
      */
-    volatile EncodeCallback callback;
+    private volatile EncodeCallback callback;
 
     /**
      * Set the message for encrypting or decrypting
      */
-    public B message(byte[] message) {
+    public B message(byte message) {
+        this.message = new byte[1];
+        this.message[0] = message;
+
+        return (B) this;
+    }
+
+    public B message(byte... message) {
         this.message = message;
 
         return (B) this;
@@ -133,6 +145,26 @@ public abstract class BaseBuilder<B extends BaseBuilder>{
         return (B) this;
     }
 
+    public B message(File file){
+        try {
+            return message(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public B message(InputStream inputStream) {
+        try {
+            message = new byte[inputStream.available()];
+            inputStream.read(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (B) this;
+    }
+
     /**
      * Set the callback
      */
@@ -160,8 +192,8 @@ public abstract class BaseBuilder<B extends BaseBuilder>{
 
             new EncodingThread(action, new BaseThread.ThreadCallback<String>() {
                 @Override
-                public void onFinish(String parametr) {
-                    callback.onSuccess(parametr);
+                public void onFinish(String parameter) {
+                    callback.onSuccess(parameter);
                 }
 
                 @Override
@@ -191,8 +223,8 @@ public abstract class BaseBuilder<B extends BaseBuilder>{
 
             new EncodingThread(action, new BaseThread.ThreadCallback<String>() {
                 @Override
-                public void onFinish(String parametr) {
-                    callback.onSuccess(parametr);
+                public void onFinish(String parameter) {
+                    callback.onSuccess(parameter);
                 }
 
                 @Override

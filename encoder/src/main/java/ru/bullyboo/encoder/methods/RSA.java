@@ -32,8 +32,8 @@ import ru.bullyboo.encoder.constants.Constants;
  */
 public class RSA{
 
-    public static final int RSA_MINIMUM_BITS = 512;
-    public static final int RSA_MAXIMUM_BITS = 65536;
+    private static final int RSA_MINIMUM_BITS = 512;
+    private static final int RSA_MAXIMUM_BITS = 65536;
 
     /**
      * All RSA methods
@@ -107,7 +107,7 @@ public class RSA{
     /**
      * This method generates KeyPair and then sends it to encrypt method
      */
-    public static String encrypt(Method method, KeySize keySize, byte[]  message,
+    public static String encrypt(Method method, KeySize keySize, byte[] message,
                                  KeyCallback keyCallBack) throws Exception {
 
         return encrypt(method, generateKey(keySize), message, keyCallBack);
@@ -116,19 +116,17 @@ public class RSA{
     /**
      * This method creates KeyPair object from public and private keys and then, sends it to encrypt method
      */
-    public static String encrypt(Method method, PublicKey publicKey, PrivateKey privateKey,
-                                 byte[]  message, KeyCallback keyCallBack) throws Exception {
+    public static String encrypt(Method method, PublicKey publicKey,
+                                 byte[] message, KeyCallback keyCallBack) throws Exception {
 
-        KeyPair key = new KeyPair(publicKey, privateKey);
-
-        return encrypt(method, key, message, keyCallBack);
+        return encrypt(method, new KeyPair(publicKey, null), message, keyCallBack);
     }
 
     /**
      * Implementation of RSA encryption
      */
     public static String encrypt(Method method, KeyPair key,
-                                 byte[]  message, KeyCallback keyCallBack) throws Exception {
+                                 byte[] message, KeyCallback keyCallBack) throws Exception {
 
         sentKeys(keyCallBack, key);
 
@@ -142,14 +140,14 @@ public class RSA{
     /**
      * This method gets the private key from KeyPair and sends it to decrypt method
      */
-    public static String decrypt(Method method, KeyPair key, byte[]  message) throws Exception {
+    public static String decrypt(Method method, KeyPair key, byte[] message) throws Exception {
         return decrypt(method, key.getPrivate(), message);
     }
 
     /**
      * Implementation of RSA decryption
      */
-    public static String decrypt(Method method, PrivateKey privateKey, byte[]  message) throws Exception{
+    public static String decrypt(Method method, PrivateKey privateKey, byte[] message) throws Exception{
 
         Cipher cipher = Cipher.getInstance(method.getMethod());
         cipher.init(Cipher.DECRYPT_MODE, privateKey);

@@ -37,7 +37,7 @@ public class TestRSA {
                 String decrypt = Encoder.BuilderRSA()
                         .message(encrypt)
                         .method(method)
-                        .privateKey(null)
+                        .privateKey("")
                         .decrypt();
 
                 decrypt = decrypt.trim();

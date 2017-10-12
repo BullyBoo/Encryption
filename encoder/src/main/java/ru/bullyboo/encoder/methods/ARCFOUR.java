@@ -34,7 +34,7 @@ public class ARCFOUR extends BaseMethod{
     /**
      * Implementation of ARCFOUR encryption
      */
-    public static String encrypt(byte[] key, int keySize, byte[]  message) throws Exception {
+    public static String encrypt(byte[] key, int keySize, byte[] message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize);
@@ -50,7 +50,7 @@ public class ARCFOUR extends BaseMethod{
     /**
      * Implementation of ARCFOUR decryption
      */
-    public static String decrypt(byte[] key, int keySize, byte[]  message) throws Exception {
+    public static String decrypt(byte[] key, int keySize, byte[] message) throws Exception {
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize);

@@ -52,7 +52,7 @@ public class HMAC {
     /**
      * Implementation of HMAC encryption
      */
-    public static String encrypt(HMAC.Method method, byte[] key, byte[]  message) throws Exception{
+    public static String encrypt(HMAC.Method method, byte[] key, byte[] message) throws Exception{
 
         SecretKeySpec keySpec = new SecretKeySpec(key, method.getMethod());
 

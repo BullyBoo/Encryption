@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        TestRSA.testAllRSA_Methods(2048);
 //        TestRSA.generateKey();
-//        TestRSA.testRSA_Async();
+        TestRSA.testRSA_Async();
 //        TestRSA.testRSA_Async_generateKey();
 
 //        TestHMAC.testHMAC();
@@ -58,6 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        TestHash.testHash();
 
-        Encoder.callC();
+//        Encoder.callC();
     }
 }

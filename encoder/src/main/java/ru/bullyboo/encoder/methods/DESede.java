@@ -68,7 +68,7 @@ public class DESede extends BaseMethod{
     /**
      * Implementation of DESede encryption
      */
-    public static String encrypt(Method method, byte[] key, Key keySize, byte[] vector, byte[]  message) throws Exception{
+    public static String encrypt(Method method, byte[] key, Key keySize, byte[] vector, byte[] message) throws Exception{
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize.size);
@@ -88,7 +88,7 @@ public class DESede extends BaseMethod{
     /**
      * Implementation of DESede decryption
      */
-    public static String decrypt(Method method, byte[] key, Key keySize, byte[] vector, byte[]  message) throws Exception{
+    public static String decrypt(Method method, byte[] key, Key keySize, byte[] vector, byte[] message) throws Exception{
 
 //        generate Key
         byte[] keyBytes = generateKey(key, keySize.size);
